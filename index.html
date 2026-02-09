@@ -2,34 +2,105 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<title>Kombi Servis Muhasebe</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kombi Servis • Muhasebe</title>
+
 <style>
-body { font-family: Arial; background:#f4f4f4; padding:20px }
-input, select, button { padding:8px; margin:5px 0; width:100% }
-.card { background:#fff; padding:15px; border-radius:8px; max-width:400px }
-.kayit { background:#eee; margin-top:5px; padding:5px; border-radius:5px }
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:system-ui, -apple-system, Segoe UI, Roboto;
+  background:#0f172a;
+  color:#e5e7eb;
+  display:flex;
+  justify-content:center;
+  padding:20px;
+}
+.app{
+  width:100%;
+  max-width:420px;
+}
+.header{
+  text-align:center;
+  margin-bottom:16px;
+}
+.header h1{
+  margin:0;
+  font-size:22px;
+}
+.card{
+  background:#020617;
+  border-radius:16px;
+  padding:16px;
+  box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+input, select{
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  border-radius:12px;
+  border:none;
+  background:#020617;
+  color:#fff;
+  outline:1px solid #1e293b;
+}
+button{
+  width:100%;
+  margin-top:14px;
+  padding:14px;
+  border:none;
+  border-radius:14px;
+  background:linear-gradient(135deg,#22c55e,#16a34a);
+  color:#022c22;
+  font-weight:700;
+  font-size:15px;
+}
+button:active{transform:scale(.98)}
+.toplam{
+  text-align:center;
+  margin-top:12px;
+  font-size:18px;
+  font-weight:700;
+}
+.kayit{
+  background:#020617;
+  border-radius:12px;
+  padding:10px;
+  margin-top:8px;
+  font-size:14px;
+  border-left:4px solid #22c55e;
+}
+.kayit small{color:#94a3b8}
 </style>
 </head>
+
 <body>
+<div class="app">
 
-<div class="card">
-<h2>Servis Kaydı</h2>
+  <div class="header">
+    <h1>🔧 Kombi Servis Muhasebe</h1>
+    <small>Günlük servis kayıtları</small>
+  </div>
 
-<input id="ad" placeholder="Müşteri adı">
-<input id="tel" placeholder="Telefon">
-<input id="adres" placeholder="Adres">
+  <div class="card">
+    <input id="ad" placeholder="Müşteri adı">
+    <input id="tel" placeholder="Telefon">
+    <input id="adres" placeholder="Adres">
 
-<select id="islem">
-  <option>Bakım</option>
-  <option>Fan Arızası</option>
-  <option>Ana Kart</option>
-</select>
+    <select id="islem">
+      <option>Bakım</option>
+      <option>Fan Arızası</option>
+      <option>Ana Kart</option>
+      <option>Diğer</option>
+    </select>
 
-<input id="tutar" type="number" placeholder="Tutar (TL)">
-<button onclick="ekle()">Kaydet</button>
+    <input id="tutar" type="number" placeholder="Tutar (TL)">
+    <button onclick="ekle()">➕ Kaydı Ekle</button>
 
-<h3 id="toplam">Toplam: 0 TL</h3>
-<div id="liste"></div>
+    <div class="toplam" id="toplam">Toplam: 0 TL</div>
+    <div id="liste"></div>
+  </div>
+
 </div>
 
 <script>
@@ -50,15 +121,15 @@ function ekle(){
   toplam += tutar;
   document.getElementById("toplam").innerText = "Toplam: " + toplam + " TL";
 
-  document.getElementById("liste").innerHTML +=
-    `<div class="kayit">
-      <b>${ad}</b> | ${islem} | ${tutar} TL
-    </div>`;
+  document.getElementById("liste").innerHTML += `
+    <div class="kayit">
+      <b>${ad}</b> – ${islem}<br>
+      <small>${tel} • ${adres}</small><br>
+      <b>${tutar} TL</b>
+    </div>
+  `;
 
-  document.getElementById("ad").value = "";
-  document.getElementById("tel").value = "";
-  document.getElementById("adres").value = "";
-  document.getElementById("tutar").value = "";
+  ad.value = tel.value = adres.value = tutar.value = "";
 }
 </script>
 
