@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Servis Muhasebe</title>
+<style>
+body { font-family: Arial; background:#f2f2f2; padding:20px; }
+h1 { text-align:center; }
+table { width:100%; background:#fff; border-collapse:collapse; }
+th, td { border:1px solid #ccc; padding:8px; text-align:center; }
+th { background:#eee; }
+input { width:100%; }
+.summary { margin-top:20px; background:#fff; padding:15px; }
+button { margin-top:10px; padding:10px; }
+</style>
+</head>
+<body>
+
+<h1>Kombi Servis Muhasebe</h1>
+
+<table id="table">
+<tr>
+<th>Tarih</th>
+<th>Müşteri</th>
+<th>Telefon</th>
+<th>Adres</th>
+<th>Yapılan İş</th>
+<th>Ücret (TL)</th>
+<th>Masraf (TL)</th>
+</tr>
+<tr>
+<td><input></td>
+<td><input></td>
+<td><input></td>
+<td><input></td>
+<td><input></td>
+<td><input type="number" class="gelir"></td>
+<td><input type="number" class="gider"></td>
+</tr>
+</table>
+
+<button onclick="satirEkle()">Yeni Satır</button>
+
+<div class="summary">
+<p>Toplam Gelir: <span id="toplamGelir">0</span> TL</p>
+<p>Toplam Gider: <span id="toplamGider">0</span> TL</p>
+<p><b>Net Kazanç: <span id="net">0</span> TL</b></p>
+</div>
+
+<script>
+function hesapla(){
+ let gelir = 0, gider = 0;
+ document.querySelectorAll('.gelir').forEach(i => gelir += Number(i.value));
+ document.querySelectorAll('.gider').forEach(i => gider += Number(i.value));
+ document.getElementById('toplamGelir').innerText = gelir;
+ document.getElementById('toplamGider').innerText = gider;
+ document.getElementById('net').innerText = gelir - gider;
+}
+document.addEventListener('input', hesapla);
+
+function satirEkle(){
+ let row = document.getElementById('table').insertRow();
+ row.innerHTML = `
+<td><input></td>
+<td><input></td>
+<td><input></td>
+<td><input></td>
+<td><input></td>
+<td><input type="number" class="gelir"></td>
+<td><input type="number" class="gider"></td>`;
+}
+</script>
+
+</body>
+</html>
