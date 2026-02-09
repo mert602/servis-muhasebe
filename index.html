@@ -1,11 +1,46 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <title>Benim Sitem</title>
+<meta charset="UTF-8">
+<title>Kombi Servis Muhasebe</title>
+<style>
+body { font-family: Arial; background:#f4f4f4; padding:20px }
+input, select, button { padding:8px; margin:5px; width:100% }
+.card { background:#fff; padding:15px; border-radius:8px; max-width:400px }
+.list { margin-top:20px }
+</style>
 </head>
 <body>
-  <h1>ÇALIŞIYOR 👑</h1>
-  <p>GitHub Pages aktif.</p>
+
+<div class="card">
+<h2>Servis Kaydı</h2>
+<input id="ad" placeholder="Müşteri adı">
+<input id="tel" placeholder="Telefon">
+<input id="adres" placeholder="Adres">
+<select id="islem">
+  <option>Bakım</option>
+  <option>Fan Arızası</option>
+  <option>Ana Kart</option>
+</select>
+<input id="tutar" type="number" placeholder="Tutar (TL)">
+<button onclick="ekle()">Kaydet</button>
+</div>
+
+<div class="list" id="liste"></div>
+
+<script>
+let toplam = 0;
+function ekle(){
+  const ad = ad.value;
+  const tel = tel.value;
+  const adres = adres.value;
+  const islem = document.getElementById("islem").value;
+  const tutar = Number(document.getElementById("tutar").value);
+  toplam += tutar;
+  liste.innerHTML += `<p>${ad} | ${islem} | ${tutar} TL</p>`;
+  liste.innerHTML += `<b>Toplam: ${toplam} TL</b><hr>`;
+}
+</script>
+
 </body>
 </html>
